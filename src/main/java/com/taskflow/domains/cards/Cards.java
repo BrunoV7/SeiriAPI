@@ -1,6 +1,7 @@
 package com.taskflow.domains.cards;
 
 import com.taskflow.domains.board.Board;
+import com.taskflow.domains.collumn.Collumn;
 import com.taskflow.domains.task.Task;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -30,8 +31,8 @@ public class Cards {
     public Status status = Status.BACKLOG;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id", nullable = false)
-    private Board board;
+    @JoinColumn(name = "collumn_id", nullable = false)
+    private Collumn collumn;
 
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Task> tasks = new ArrayList<>();

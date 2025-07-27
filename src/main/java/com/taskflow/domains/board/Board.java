@@ -1,16 +1,26 @@
 package com.taskflow.domains.board;
 
 import com.taskflow.domains.cards.Cards;
+import com.taskflow.domains.collumn.Collumn;
 import com.taskflow.domains.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.smartcardio.Card;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Board {
 
     @Id
@@ -27,6 +37,16 @@ public class Board {
     private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Cards> cards = new ArrayList<>();
+    private List<Collumn> collumns = new ArrayList<>();
+
+    public Board(String title, String description, User user) {
+        this.title = title;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Integer quantityOfCollumns() {
+        return collumns.size();
+    }
 
 }
