@@ -33,9 +33,9 @@ public class CollumnController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/find/all")
-    public ResponseEntity<List<CollumnResponseDTO>> findAll() {
-        List <CollumnResponseDTO> response = this.collumnService.findAll();
+    @GetMapping("/find/all/{id}")
+    public ResponseEntity<List<CollumnResponseDTO>> findAll(@PathVariable UUID id) {
+        List <CollumnResponseDTO> response = this.collumnService.findAll(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

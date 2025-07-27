@@ -55,8 +55,8 @@ public class CollumnService {
         return new CollumnResponseDTO(newCollumn);
     }
 
-    public List<CollumnResponseDTO> findAll() {
-        return collumnRepository.findAll().stream().map(CollumnResponseDTO::new).collect(Collectors.toList());
+    public List<CollumnResponseDTO> findAll(UUID id) {
+        return collumnRepository.findAllByBoard_Id(id).stream().map(CollumnResponseDTO::new).collect(Collectors.toList());
     }
 
     public CollumnResponseDTO findById(UUID id) {
