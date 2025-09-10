@@ -34,6 +34,8 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
 
+    private String avatarUrl;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Board> boards = new ArrayList<>();
 
@@ -41,12 +43,13 @@ public class User implements UserDetails {
 
     public User() {}
 
-    public User(String firstName, String lastName, String password, String email, UserRole role) {
+    public User(String firstName, String lastName, String password, String email, UserRole role, String avatarUrl) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.avatarUrl = avatarUrl;
     }
 
     @Override

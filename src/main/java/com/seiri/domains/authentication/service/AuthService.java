@@ -48,7 +48,7 @@ public class AuthService{
             throw new InvalidEmailException("Email already exists");
         }
         String hashedPassword = new BCryptPasswordEncoder().encode(newUser.getPassword());
-        User user = new User(newUser.getFirstName(), newUser.getLastName(), hashedPassword, newUser.getEmail(), UserRole.USER);
+        User user = new User(newUser.getFirstName(), newUser.getLastName(), hashedPassword, newUser.getEmail(), UserRole.USER, "");
         try{
             user = authRepository.save(user);
         } catch(Exception e){
@@ -61,8 +61,8 @@ public class AuthService{
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getUsername()
-
+                user.getUsername(),
+                ""
         );
     }
 
@@ -78,8 +78,8 @@ public class AuthService{
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getUsername()
-
+                user.getUsername(),
+        ""
         );
     }
 

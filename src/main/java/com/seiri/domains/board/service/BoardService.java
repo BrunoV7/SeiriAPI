@@ -3,6 +3,7 @@ package com.seiri.domains.board.service;
 import com.seiri.domains.board.Board;
 import com.seiri.domains.board.dto.*;
 import com.seiri.domains.board.exception.BoardNotFoundException;
+import com.seiri.domains.board.exception.BoardUnauthorizedAccessException;
 import com.seiri.domains.board.exception.FailedToCreateBoardException;
 import com.seiri.domains.board.repository.BoardRepository;
 import com.seiri.domains.user.service.UserService;
@@ -59,19 +60,21 @@ public class BoardService {
     }
 
     public BoardResponseDTO getBoardById(UUID id) {
-        if(boardRepository.getBoardById(id) == null) return null;
         Board board = boardRepository.getBoardById(id);
-        if(board == null) throw new BoardNotFoundException();
+        if (board == null) {
+            throw new BoardNotFoundException(); // 404
+        }
+        if (!board.isOwner(userService.getCurrentUser())) {
+            throw new BoardUnauthorizedAccessException(); // 403
+        }
         return new BoardResponseDTO(board);
     }
 
     public List<BoardResponseDTO> getBoards() {
-        List<Board> boards = boardRepository.findAll();
-        List<BoardResponseDTO> boardResponseDTOS = new ArrayList<>();
-        for(Board board : boards){
-            boardResponseDTOS.add(new BoardResponseDTO(board));
-        }
-        return boardResponseDTOS;
+        List<Board> boards = boardRepository.getBoardsByUserId(userService.getCurrentUser().getId());
+        return boards.stream()
+                .map(BoardResponseDTO::new)
+                .toList();
     }
 
     public Boolean isBoardPresent(UUID id) {

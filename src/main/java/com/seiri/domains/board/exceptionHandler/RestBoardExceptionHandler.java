@@ -1,6 +1,7 @@
 package com.seiri.domains.board.exceptionHandler;
 
 import com.seiri.domains.board.exception.BoardNotFoundException;
+import com.seiri.domains.board.exception.BoardUnauthorizedAccessException;
 import com.seiri.domains.board.exception.FailedToCreateBoardException;
 import com.seiri.infra.DefaultErrorDTO;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,17 @@ public class RestBoardExceptionHandler extends ResponseEntityExceptionHandler {
                 "Something went wrong while creating the board"
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BoardUnauthorizedAccessException.class)
+    public ResponseEntity<DefaultErrorDTO> handleBoardUnauthorizedAccessException(BoardUnauthorizedAccessException ex) {
+        DefaultErrorDTO error = new DefaultErrorDTO(
+                HttpStatus.UNAUTHORIZED,
+                "BOARD-ERR-CODE-003",
+                ex.getMessage(),
+                "Something went wrong while creating the board"
+        );
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
 }

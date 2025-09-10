@@ -46,4 +46,8 @@ public class Board {
         return collumns.size();
     }
 
+    public boolean isOwner(User user) {
+        return this.user.equals(user);
+    }
+
 }

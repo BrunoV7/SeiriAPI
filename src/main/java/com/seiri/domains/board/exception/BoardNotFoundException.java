@@ -8,4 +8,5 @@ public class BoardNotFoundException extends RuntimeException {
     public BoardNotFoundException(){
         super("No board with the selected id found");
     }
+
 }
