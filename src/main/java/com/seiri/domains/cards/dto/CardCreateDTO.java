@@ -1,18 +1,15 @@
 package com.seiri.domains.cards.dto;
 
-import com.seiri.domains.cards.Status;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class CardDTO {
+public class CardCreateDTO {
 
     @NotBlank
     @Size(max = 100)
@@ -21,7 +18,18 @@ public class CardDTO {
     @Size(max = 500)
     private String description;
 
+    @NotNull
+    private Integer position;
+
+    private Integer priorityLevel = 0;
+
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Status status;
+
+    private Boolean archived = false;
+
+    @NotNull
+    private UUID collumnId;
+
+    private UUID statusId;
 }

@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CollumnDTO {
 
-    @NotBlank
     private String name;
+
+    private String description;
 
 }

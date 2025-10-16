@@ -1,5 +1,6 @@
 package com.seiri.domains.board;
 
+import com.seiri.domains.cards.Status;
 import com.seiri.domains.collumn.Collumn;
 import com.seiri.domains.user.User;
 import jakarta.persistence.*;
@@ -35,6 +36,9 @@ public class Board {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Collumn> collumns = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Status> statuses = new ArrayList<>();
 
     public Board(String title, String description, User user) {
         this.title = title;

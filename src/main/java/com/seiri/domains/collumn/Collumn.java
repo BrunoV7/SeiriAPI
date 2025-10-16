@@ -25,6 +25,8 @@ public class Collumn {
 
     private String name;
 
+    private String description;
+
     @OneToMany(mappedBy = "collumn", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Cards> cards = new ArrayList<>();
 
