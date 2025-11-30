@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/collumn")
+@RequestMapping("/api/collumn")
 public class CollumnController {
 
     private final CollumnService collumnService;
@@ -21,31 +21,31 @@ public class CollumnController {
         this.collumnService = collumnService;
     }
 
-    @PostMapping("/new/{id}")
+    @PostMapping("/v1/new/{id}")
     public ResponseEntity<CollumnResponseDTO> newCollumn(@PathVariable UUID id, @RequestBody CollumnDTO collumn) {
         CollumnResponseDTO response = this.collumnService.newCollumn(id, collumn);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/v1/update/{id}")
     public ResponseEntity<CollumnResponseDTO> updateCollumn(@PathVariable UUID id, @RequestBody CollumnDTO collumn) {
         CollumnResponseDTO response = this.collumnService.updateCollumn(id, collumn);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/find/all/{id}")
+    @GetMapping("/v1/find/all/{id}")
     public ResponseEntity<List<CollumnResponseDTO>> findAll(@PathVariable UUID id) {
         List <CollumnResponseDTO> response = this.collumnService.findAll(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/v1/find/{id}")
     public ResponseEntity<CollumnResponseDTO> findById(@PathVariable UUID id) {
         CollumnResponseDTO response = this.collumnService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/v1/delete/{id}")
     public ResponseEntity<CollumnDeleteDTO> delete(@PathVariable UUID id) {
         CollumnDeleteDTO response = this.collumnService.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);

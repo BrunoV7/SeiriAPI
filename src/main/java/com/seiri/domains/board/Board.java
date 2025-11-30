@@ -1,5 +1,6 @@
 package com.seiri.domains.board;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.seiri.domains.cards.Status;
 import com.seiri.domains.collumn.Collumn;
 import com.seiri.domains.user.User;

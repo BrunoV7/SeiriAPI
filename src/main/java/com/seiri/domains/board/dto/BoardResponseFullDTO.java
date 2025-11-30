@@ -1,6 +1,8 @@
 package com.seiri.domains.board.dto;
 
 import com.seiri.domains.board.Board;
+import com.seiri.domains.cards.Status;
+import com.seiri.domains.cards.dto.StatusDTO;
 import com.seiri.domains.collumn.dto.CollumnResponseFullDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +22,8 @@ public class BoardResponseFullDTO {
     private String description;
     private Integer collumn_quantity;
     private List<CollumnResponseFullDTO> collumns;
+    private List<StatusDTO> statuses;
+
 
     public BoardResponseFullDTO(Board board) {
         this.id = board.getId();
@@ -27,6 +31,7 @@ public class BoardResponseFullDTO {
         this.description = board.getDescription();
         this.collumn_quantity = board.quantityOfCollumns();
         this.collumns = board.getCollumns().stream().map(CollumnResponseFullDTO::new).collect(Collectors.toList());
+        this.statuses = board.getStatuses().stream().map(StatusDTO::new).collect(Collectors.toList());
     }
 
 }

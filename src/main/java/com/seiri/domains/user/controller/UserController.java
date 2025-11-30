@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/sc/user")
+@RequestMapping("/api/sc/user")
 public class UserController {
 
     private final UserService userService;
@@ -16,12 +16,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/me")
+    @GetMapping("/v1/me")
     public String me() {
         return this.userService.me();
     }
 
-    @GetMapping("/info")
+    @GetMapping("/v1/info")
     public ResponseEntity<UserDTO> info() {
         UserDTO response = this.userService.getCurrentUserDTO();
         return ResponseEntity.status(HttpStatus.OK).body(response);

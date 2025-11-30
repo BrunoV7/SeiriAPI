@@ -1,6 +1,8 @@
 package com.seiri.domains.cards;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.seiri.domains.board.Board;
+import com.seiri.domains.cards.dto.StatusDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -42,6 +44,11 @@ public class Status {
         this.title = title;
         this.colorCode = colorCode;
         this.board = board;
+    }
+
+    public void UpdateStatusFromDTO(StatusDTO statusDTO) {
+        this.title = statusDTO.getTitle();
+        this.colorCode = statusDTO.getColorCode();
     }
 
 }

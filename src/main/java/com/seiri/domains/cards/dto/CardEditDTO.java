@@ -22,6 +22,6 @@ public class CardEditDTO {
     private Boolean archived;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Status status;
+    private StatusDTO status;
     private UUID collumnId;
 }

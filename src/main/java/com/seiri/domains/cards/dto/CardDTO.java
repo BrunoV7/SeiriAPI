@@ -23,5 +23,5 @@ public class CardDTO {
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Status status;
+    private StatusDTO status;
 }

@@ -1,5 +1,6 @@
 package com.seiri.domains.collumn;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.seiri.domains.board.Board;
 import com.seiri.domains.cards.Cards;
 import jakarta.persistence.*;

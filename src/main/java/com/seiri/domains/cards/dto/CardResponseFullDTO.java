@@ -27,7 +27,7 @@ public class CardResponseFullDTO {
     private Boolean archived;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Status status;
+    private StatusDTO status;
     private UUID collumnId;
     private Integer numOfTasks;
     private List<TaskResponseDTO> tasks;
@@ -45,7 +45,7 @@ public class CardResponseFullDTO {
         this.archived = card.getArchived();
         this.startDate = card.getStartDate();
         this.endDate = card.getEndDate();
-        this.status = card.getStatus();
+        this.status = card.getStatus() != null ? new StatusDTO(card.getStatus()) : null;
         this.collumnId = card.getCollumn() != null ? card.getCollumn().getId() : null;
         this.numOfTasks = card.quantityOfTasks();
         this.tasks = card.getTasks().stream()

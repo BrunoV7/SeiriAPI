@@ -77,6 +77,8 @@ public class CardService {
 
         Cards card = findByIdInternal(cardId);
         card.updateFromDTO(dto);
+        System.out.println(dto.getStatus().getId());
+        card.setStatus(getStatus(dto.getStatus().getId()));
 
         try {
             card.setUpdatedAt(null);
@@ -123,9 +125,10 @@ public class CardService {
 
     // ---------------- STATUS MANAGEMENT ----------------
     public Status createStatus(Status status, UUID boardId) {
+        System.out.println(status.getTitle());
         if (status == null || status.getTitle() == null)
             throw new InvalidCardCreationParameters("Status title is null");
-
+        System.out.println(boardId.toString());
         Board board = boardService.getBoardByIdInternal(boardId);
         if (board == null) throw new InvalidCardCreationParameters("Board not found");
 
@@ -169,5 +172,20 @@ public class CardService {
     public List<Cards> findAllByStatus(Status status) {
         if (status == null) throw new InvalidCardCreationParameters("Status is null");
         return cardRepository.findAllByStatus(status);
+    }
+
+    public CardResponseFullDTO updateCardStatus(UUID cardId, UUID statusId) {
+        var card = findByIdInternal(cardId);
+        if (card == null) throw new NoCardFoundException("No card found with id: " + cardId);
+        card.setStatus(getStatus(statusId));
+
+        try {
+            card.setUpdatedAt(null);
+            card = cardRepository.save(card);
+            cardRepository.flush();
+        } catch (Exception e) {
+            throw new FailedToCreateCardException(e.getMessage())   ;
+        }
+        return new CardResponseFullDTO(card);
     }
 }

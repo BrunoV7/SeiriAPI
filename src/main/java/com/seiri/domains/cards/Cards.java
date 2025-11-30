@@ -1,7 +1,10 @@
 package com.seiri.domains.cards;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seiri.domains.cards.dto.CardDTO;
 import com.seiri.domains.cards.dto.CardEditDTO;
+import com.seiri.domains.cards.dto.StatusDTO;
 import com.seiri.domains.collumn.Collumn;
 import com.seiri.domains.task.Task;
 import jakarta.persistence.*;
@@ -106,7 +109,6 @@ public class Cards {
         this.description = cardDTO.getDescription();
         this.startDate = cardDTO.getStartDate();
         this.endDate = cardDTO.getEndDate();
-        this.status = cardDTO.getStatus();
     }
 
     public void updateFromDTO(CardEditDTO cardDTO) {
@@ -138,10 +140,6 @@ public class Cards {
 
         if (cardDTO.getEndDate() != null)
             this.endDate = cardDTO.getEndDate();
-
-        if (cardDTO.getStatus() != null)
-            this.status = cardDTO.getStatus();
-
     }
 
 }

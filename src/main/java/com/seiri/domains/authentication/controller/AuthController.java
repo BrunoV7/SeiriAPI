@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -24,13 +24,13 @@ public class AuthController {
         this.securityService = securityService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/v1/register")
     public ResponseEntity<PostAuthDTO> register(@RequestBody @Valid NewUserDTO user) {
         PostAuthDTO response = authService.registerNewUser(user);
         return ResponseEntity.status(201).body(response);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/v1/login")
     public ResponseEntity<PostAuthDTO> login(@RequestBody @Valid LoginDTO user) {
         PostAuthDTO response = authService.login(user);
         return ResponseEntity.status(201).body(response);
