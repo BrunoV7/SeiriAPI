@@ -33,7 +33,10 @@ public class SecurityFilter extends OncePerRequestFilter {
         var token = this.recoverToken(request);
         if(token != null) {
             var login = jwtService.validateToken(token);
-            System.out.println(login);
+            if(login.isEmpty()){
+                filterChain.doFilter(request, response);
+                return;
+            };
             Optional<User> user = authRepository.findById(UUID.fromString(login));
             var authentication = new UsernamePasswordAuthenticationToken(login, null, user.get().getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
