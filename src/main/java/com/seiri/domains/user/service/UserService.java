@@ -39,6 +39,6 @@ public class UserService {
 
     public UserDTO getCurrentUserDTO() {
         User user = getCurrentUser();
-        return new UserDTO(user.getFirstName(), user.getLastName(), user.getEmail());
+        return new UserDTO(user.getFirstName(), user.getLastName(), user.getEmail(), user.getAvatarUrl());
     }
 }
